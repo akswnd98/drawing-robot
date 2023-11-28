@@ -1,0 +1,44 @@
+import numpy as np
+import math
+from functools import reduce
+
+DIRECTIONS = [
+    [1., 0.],
+    [-1., 0.],
+    [0., 1.],
+    [0., -1.],
+    [1., 1.],
+    [1., -1.],
+    [-1., 1.],
+    [-1., -1.],
+]
+
+VERTICAL_MAX_STEP_NUM = 8000
+HORIZONTAL_MAX_STEP_NUM = int(VERTICAL_MAX_STEP_NUM * 210 / 297)
+MAX_STEP_NUM = [HORIZONTAL_MAX_STEP_NUM, VERTICAL_MAX_STEP_NUM]
+
+def find_direction (cur_pos, target_pos):
+    ret = DIRECTIONS[0]
+    for direction in DIRECTIONS:
+        if np.dot(target_pos - cur_pos, np.array(direction) / np.linalg.norm(np.array(direction))) > \
+        np.dot(target_pos - cur_pos, np.array(ret) / np.linalg.norm(np.array(ret))):
+            ret = direction
+
+    return ret
+
+def get_scale_factor (bbox):
+    return MAX_STEP_NUM[1] / bbox[1]
+
+def convert_paths_to_step_paths (bbox, paths):
+    scale_factor = get_scale_factor(bbox)
+    ret = []
+    for path in paths:
+        path_ret = []
+        for pos in path:
+            path_ret += [[int(max(0, min(MAX_STEP_NUM[i], scale_factor * pos[i]))) for i in range(2)]]
+        ret += [path_ret]
+                
+    return ret
+
+def check_overflow (cur_pos, direction):
+    return reduce(lambda acc, cur: acc or cur, [(cur_pos[i] + direction[i] < 0) or (cur_pos[i] + direction[i] >= MAX_STEP_NUM[i]) for i in range(2)], False)
