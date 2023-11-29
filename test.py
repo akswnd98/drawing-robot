@@ -1,4 +1,5 @@
 from path import *
+from servo import *
 
 #print(convert_paths_to_step_paths([300, 600], [[[32, 100], [43, 20]]]))
 #print(find_direction(np.array([1, 1]), np.array([3, 3])))
@@ -7,4 +8,6 @@ from path import *
 #print(find_direction(np.array([1, 1]), np.array([2, 3])))
 #print(find_direction(np.array([1, 1]), np.array([-2, 3])))
 
-print(check_overflow([100, 3999], [0, 1]))
+
+servo = Servo(12)
+servo.down_pen()

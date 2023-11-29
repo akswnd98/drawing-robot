@@ -12,6 +12,7 @@ from random import randint
 import json
 from path import *
 from motor import *
+from draw import *
 
 mainloop = None
 
@@ -160,7 +161,6 @@ class PointPathsChrc(Characteristic):
             self.bbox_turn = False
         elif segment_str == '<end>':
             self.value = json.loads(self.value_str)
-            print(self.bbox, self.value_str)
             step_paths = convert_paths_to_step_paths(self.bbox, self.value)
             drawer = Drawer()
             drawer.draw(step_paths)
