@@ -8,7 +8,7 @@ left_out_pin = 28
 
 output_pins = [left_dir_pin, left_out_pin, right_dir_pin, right_out_pin]
 
-time_step = 1 / 500
+time_step = 1 / 200
 
 def init_output_pin (pin):
     wiringpi.pinMode(pin, wiringpi.OUTPUT)

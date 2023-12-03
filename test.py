@@ -1,13 +1,22 @@
 from path import *
 from servo import *
+from motor import *
+import wiringpi
 
-#print(convert_paths_to_step_paths([300, 600], [[[32, 100], [43, 20]]]))
-#print(find_direction(np.array([1, 1]), np.array([3, 3])))
-#print(find_direction(np.array([3, 3]), np.array([3, 3])))
-#print(find_direction(np.array([1, 1]), np.array([1, 2])))
-#print(find_direction(np.array([1, 1]), np.array([2, 3])))
-#print(find_direction(np.array([1, 1]), np.array([-2, 3])))
+wiringpi.wiringPiSetup()
 
+try:
+    init_all_output_pins()
+except KeyboardInterrupt:
+    deinit_all_output_pins()
 
-servo = Servo(12)
-servo.down_pen()
+#for _ in range(1000):
+#    step_motors(wiringpi.HIGH, wiringpi.HIGH, wiringpi.HIGH, wiringpi.HIGH)
+#for _ in range(1000):
+#    step_motors(wiringpi.HIGH, wiringpi.LOW, wiringpi.HIGH, wiringpi.LOW)
+for _ in range(1000):
+    step_direction([1, 0])
+
+for _ in range(1000):
+    step_direction([-1, 0])
+

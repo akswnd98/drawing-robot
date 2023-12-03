@@ -5,7 +5,7 @@ from draw import *
 
 wiringpi.wiringPiSetup()
 
-test_dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]]
+# test_dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]]x
 
 try:
     init_all_output_pins()
